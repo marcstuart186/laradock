@@ -47,6 +47,29 @@ ARG PGID=1000
 RUN groupadd -g $PGID laradock && \
     useradd -u $PUID -g laradock -m laradock
 
+RUN useradd -ms /bin/bash marc
+
+#Add VIM
+COPY ./myHomeDir /home/marc/
+COPY ./myHomeDir /home/root/
+
+#Add python
+RUN apt-get update
+RUN apt-get -y upgrade
+RUN apt-get -y install build-essential cmake
+RUN apt-get -y install python-dev python3-dev
+RUN cd /home/marc/.vim/bundle/youcompleteme/ && ./install.py --clang-completer
+
+#Add PhantomJS
+RUN apt-get -y install wget
+RUN mkdir -p /opt/phantomjs/
+RUN cd /opt/phantomjs/ && wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 && tar -xjvf phantomjs-2.1.1-linux-x86_64.tar.bz2
+
+
+RUN echo "" >> ~/.bashrc && \
+echo 'export PATH="/opt/phantomjs/phantomjs-2.1.1-linux-x86_64/bin/:$PATH"' >> ~/.bashrc
+RUN echo "" >> /home/marc/.bashrc && \
+echo 'export PATH="/opt/phantomjs/phantomjs-2.1.1-linux-x86_64/bin/:$PATH"' >> /home/marc/.bashrc
 
 #####################################
 # SOAP:
