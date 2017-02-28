@@ -56,6 +56,7 @@ COPY ./myHomeDir /home/root/
 #Add python
 RUN apt-get update
 RUN apt-get -y upgrade
+RUN apt-get -y install sudo
 RUN apt-get -y install build-essential cmake
 RUN apt-get -y install python-dev python3-dev
 RUN cd /home/marc/.vim/bundle/youcompleteme/ && ./install.py --clang-completer
@@ -70,6 +71,10 @@ RUN echo "" >> ~/.bashrc && \
 echo 'export PATH="/opt/phantomjs/phantomjs-2.1.1-linux-x86_64/bin/:$PATH"' >> ~/.bashrc
 RUN echo "" >> /home/marc/.bashrc && \
 echo 'export PATH="/opt/phantomjs/phantomjs-2.1.1-linux-x86_64/bin/:$PATH"' >> /home/marc/.bashrc
+
+RUN echo "" >> /etc/sudoers && \
+echo 'marc    ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers
+
 
 #####################################
 # SOAP:
