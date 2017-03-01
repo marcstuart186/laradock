@@ -52,6 +52,7 @@ RUN useradd -ms /bin/bash marc
 #Add VIM
 COPY ./myHomeDir /home/marc/
 COPY ./myHomeDir /home/root/
+COPY ./myHomeDir /root/
 
 #Add python
 RUN apt-get update

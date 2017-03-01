@@ -1,6 +1,8 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+set tabstop=4
+set expandtab
 let mapleader=","
 let g:netrw_liststyle = 3
 let g:netrw_banner = 0
@@ -18,6 +20,7 @@ let g:airline_theme='jellybeans'
 set ttimeoutlen=10
 let g:airline_powerline_fonts = 1
 nmap <F8> :TagbarToggle<CR>
+nmap <F7> :SyntasticToggleMode<CR>
 
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
